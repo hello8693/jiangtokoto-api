@@ -1,26 +1,5 @@
 # 姜言 - 随机姜胤表情包服务
 
-<div align="center">
-  <img src="public/images/imag4. 配置环境变量
-
-复制示例配置文件并按需修改：
-
-```bash
-cp .env.example .env
-```
-
-环境变量说明：
-
-| 变量名 | 描述 | 默认值 |
-|-------|------|-------|
-| PORT | 服务器监听端口 | 3000 |
-| CACHE_TTL | 缓存过期时间(毫秒) | 3600000 (1小时) |
-| IMAGES_DIRECTORY | 图片目录相对路径 | public/images/images |
-
-5. 添加表情包="姜言示例" width="300px" style="border-radius: 8px;">
-  <p><i>「随时随地，一键姜言」</i></p>
-</div>
-
 ## 🎭 项目介绍
 
 「姜言」是一个基于 NestJS 的随机表情包服务，专门提供姜胤的各种表情包。无论您是在即时通讯软件、文档还是博客中，都可以轻松插入姜胤表情包，为您的表达增添趣味与个性。
@@ -59,7 +38,7 @@ cp .env.example .env
 1. 克隆仓库
 
 ```bash
-git clone https://github.com/yourusername/jiangtokoto.git
+git clone https://github.com//jiangtokoto.git
 cd jiangtokoto
 ```
 
