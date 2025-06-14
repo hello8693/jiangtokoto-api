@@ -7,9 +7,9 @@ import {
   HttpStatus,
   StreamableFile,
   Query,
-  CacheInterceptor,
   UseInterceptors,
 } from '@nestjs/common';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 import { Response } from 'express';
 import { MemesService } from './memes.service';
 
@@ -26,7 +26,7 @@ export class MemesController {
     @Query('width') width?: number,
     @Query('height') height?: number,
   ): Promise<StreamableFile | void> {
-    const meme = await this.memesService.getRandomMeme();
+    const meme = this.memesService.getRandomMeme();
 
     if (!meme) {
       this.logger.warn('No meme files available');
@@ -52,10 +52,13 @@ export class MemesController {
         throw new Error('Failed to process meme');
       }
 
+      // 对文件名进行编码，确保Content-Disposition头部符合规范
+      const encodedFilename = encodeURIComponent(processedMeme.filename);
+      
       res.set({
         'Content-Type': processedMeme.mimeType,
         'Content-Length': processedMeme.size,
-        'Content-Disposition': `inline; filename="${processedMeme.filename}"`,
+        'Content-Disposition': `inline; filename="${encodedFilename}"; filename*=UTF-8''${encodedFilename}`,
         // 添加ETag可以支持条件请求
         ETag: `"${meme.hash}"`,
       });
