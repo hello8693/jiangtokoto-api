@@ -2,11 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import * as compression from 'compression';
+import * as dotenv from 'dotenv';
+
+// 加载.env文件
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Bootstrap');
-  const port = process.env.PORT ?? 3000;
+  const port = parseInt(process.env.PORT ?? '3000', 10);
 
   // 启用CORS
   app.enableCors();

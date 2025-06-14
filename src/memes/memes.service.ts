@@ -27,13 +27,11 @@ export class MemesService implements OnModuleInit {
   private readonly logger = new Logger(MemesService.name);
   private readonly memesDirectory = path.join(
     process.cwd(),
-    'public',
-    'images',
-    'images',
+    process.env.IMAGES_DIRECTORY || 'public/images/images',
   );
   private memeFiles: MemeInfo[] = [];
   private readonly validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-  private readonly CACHE_TTL = 3600 * 1000; // 1小时缓存
+  private readonly CACHE_TTL = parseInt(process.env.CACHE_TTL || '3600000', 10); // 从环境变量读取缓存时间，默认1小时
   private lastReloadTime = 0;
 
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
